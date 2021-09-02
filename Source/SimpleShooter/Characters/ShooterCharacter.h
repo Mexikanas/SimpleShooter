@@ -30,8 +30,12 @@ private:
 	void MoveRight(float AxisValue);
 	void LookUpRate(float AxisValue);
 	void LookRightRate(float AxisValue);
+	void RunPressed();
+	void RunReleased();
 
+	bool bRun = false;
 	UPROPERTY(EditAnywhere)
 		float RotationRate = 10.f;
-
+	UPROPERTY(EditAnywhere)
+		float WalkSpeed = 0.5f;
 };
