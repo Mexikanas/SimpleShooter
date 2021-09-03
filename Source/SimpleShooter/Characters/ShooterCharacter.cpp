@@ -77,7 +77,6 @@ bool AShooterCharacter::IsPlayerBehindEnemy(AActor* Shooter) const
 	FVector OwnerLocation = GetOwner()->GetActorLocation();
 	FVector FromOwnerToShooter = ShooterLocation - OwnerLocation;
 	float AngleFromFront = FMath::Abs(FromOwnerToShooter.Rotation().Yaw);
-	UE_LOG(LogTemp, Warning, TEXT("Angle from front to Shooter is %f"), AngleFromFront);
 
 	if (AngleFromFront > 90.f)
 	{
@@ -88,6 +87,7 @@ bool AShooterCharacter::IsPlayerBehindEnemy(AActor* Shooter) const
 		return false;
 	}
 }
+
 bool AShooterCharacter::IsDead() const
 {
 	return bDead;
