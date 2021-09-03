@@ -6,9 +6,8 @@
 #include "AIController.h"
 #include "ShooterAIController.generated.h"
 
-/**
- * 
- */
+class UBehaviorTree;
+
 UCLASS()
 class SIMPLESHOOTER_API AShooterAIController : public AAIController
 {
@@ -22,6 +21,6 @@ protected:
 
 private:
 	UPROPERTY(EditAnywhere)
-		float AcceptanceRadius = 200.f;
+		UBehaviorTree* AIBehavior = nullptr;
 
 };
