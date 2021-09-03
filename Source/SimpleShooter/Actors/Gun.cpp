@@ -25,10 +25,17 @@ void AGun::BeginPlay()
 	
 }
 
+void AGun::PullTriggerMethod()
+{
+	UE_LOG(LogTemp, Warning, TEXT("You've been shot."));
+}
+
 // Called every frame
 void AGun::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	
 
 }
 

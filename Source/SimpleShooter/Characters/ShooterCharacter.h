@@ -34,6 +34,7 @@ private:
 	void LookRightRate(float AxisValue);
 	void RunPressed();
 	void RunReleased();
+	void Shoot();
 
 	bool bRun = false;
 	UPROPERTY(EditAnywhere)
