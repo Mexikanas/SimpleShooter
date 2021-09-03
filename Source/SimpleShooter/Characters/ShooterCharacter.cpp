@@ -19,6 +19,8 @@ void AShooterCharacter::BeginPlay()
 	
 	Health = MaxHealth;
 
+	
+
 	SpawnGun();
 }
 
@@ -63,6 +65,7 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Dama
 	DamageToApply = FMath::Min(Health, DamageToApply);
 	Health -= DamageToApply;
 	UE_LOG(LogTemp, Warning, TEXT("Health is %f"), Health);
+
 	if (Health == 0) 
 	{ 
 		bShotFromBehind = IsPlayerBehindEnemy(DamageCauser);
@@ -76,7 +79,7 @@ bool AShooterCharacter::IsPlayerBehindEnemy(AActor* Shooter) const
 	FVector ShooterLocation = Shooter->GetActorLocation();
 	FVector OwnerLocation = GetOwner()->GetActorLocation();
 	FVector FromOwnerToShooter = ShooterLocation - OwnerLocation;
-	float AngleFromFront = FMath::Abs(FromOwnerToShooter.Rotation().Yaw);
+	float AngleFromFront = FMath::Abs(FromOwnerToShooter.Rotation().Yaw - GetActorRotation().Yaw);
 
 	if (AngleFromFront > 90.f)
 	{
