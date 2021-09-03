@@ -19,6 +19,11 @@ void AShooterAIController::BeginPlay()
 			TEXT("PlayerLocation"),
 			PlayerPawn->GetActorLocation()
 		);
+		GetBlackboardComponent()->SetValueAsVector
+		(
+			TEXT("StartLocation"),
+			GetPawn()->GetActorLocation()
+		);
 	}
 }
 
