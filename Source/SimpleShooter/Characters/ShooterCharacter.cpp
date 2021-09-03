@@ -30,6 +30,7 @@ void AShooterCharacter::SpawnGun()
 	Gun->SetOwner(this);
 }
 
+
 // Called every frame
 void AShooterCharacter::Tick(float DeltaTime)
 {
@@ -62,8 +63,39 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Dama
 	DamageToApply = FMath::Min(Health, DamageToApply);
 	Health -= DamageToApply;
 	UE_LOG(LogTemp, Warning, TEXT("Health is %f"), Health);
-
+	if (Health == 0) 
+	{ 
+		bShotFromBehind = IsPlayerBehindEnemy(DamageCauser);
+		bDead = true;
+	}
 	return DamageToApply;
+}
+
+bool AShooterCharacter::IsPlayerBehindEnemy(AActor* Shooter) const
+{
+	FVector ShooterLocation = Shooter->GetActorLocation();
+	FVector OwnerLocation = GetOwner()->GetActorLocation();
+	FVector FromOwnerToShooter = ShooterLocation - OwnerLocation;
+	float AngleFromFront = FMath::Abs(FromOwnerToShooter.Rotation().Yaw);
+	UE_LOG(LogTemp, Warning, TEXT("Angle from front to Shooter is %f"), AngleFromFront);
+
+	if (AngleFromFront > 90.f)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+bool AShooterCharacter::IsDead() const
+{
+	return bDead;
+}
+
+bool AShooterCharacter::IsShotFromBehind() const
+{
+	return bShotFromBehind;
 }
 
 void AShooterCharacter::MoveForward(float AxisValue)

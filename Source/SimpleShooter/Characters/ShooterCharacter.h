@@ -25,6 +25,14 @@ public:
 
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 
+	UFUNCTION(BlueprintPure)
+		bool IsDead() const;
+
+	UFUNCTION(BlueprintPure)
+		bool IsShotFromBehind() const;
+
+
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -38,8 +46,11 @@ private:
 	void RunReleased();
 	void Shoot();
 	void SpawnGun();
+	bool IsPlayerBehindEnemy(AActor* Shooter) const;
 
 	bool bRun = false;
+	bool bDead = false;
+	bool bShotFromBehind = false;
 	UPROPERTY(EditAnywhere)
 		float RotationRate = 10.f;
 	UPROPERTY(EditAnywhere)
