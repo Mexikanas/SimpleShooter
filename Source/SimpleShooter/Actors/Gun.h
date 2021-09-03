@@ -26,7 +26,8 @@ protected:
 	virtual void BeginPlay() override;
 
 private:	
-	
+	void CheckForMuzzleFlash() const;
+
 	UPROPERTY(VisibleAnywhere)
 		USceneComponent* Root;
 	UPROPERTY(VisibleAnywhere)

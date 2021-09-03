@@ -35,6 +35,7 @@ private:
 	void RunPressed();
 	void RunReleased();
 	void Shoot();
+	void SpawnGun();
 
 	bool bRun = false;
 	UPROPERTY(EditAnywhere)

@@ -17,6 +17,11 @@ void AShooterCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	SpawnGun();
+}
+
+void AShooterCharacter::SpawnGun()
+{
 	Gun = GetWorld()->SpawnActor<AGun>(GunClass);
 	GetMesh()->HideBoneByName(TEXT("weapon_r"), EPhysBodyOp::PBO_None);
 	Gun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("WeaponSocket"));
@@ -86,4 +91,5 @@ void AShooterCharacter::Shoot()
 	if (!Gun) { return; }
 	Gun->PullTriggerMethod();
 }
+
 

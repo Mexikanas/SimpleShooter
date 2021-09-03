@@ -24,11 +24,15 @@ void AGun::BeginPlay()
 {
 	Super::BeginPlay();
 
+	CheckForMuzzleFlash();
+}
+
+void AGun::CheckForMuzzleFlash() const
+{
 	if (!MuzzleFlash)
 	{
-		UE_LOG(LogTemp, Error, TEXT("No Particle effect has been attached to the %s actor"), *GetOwner()->GetName());
+		UE_LOG(LogTemp, Error, TEXT("No MuzzleFlash particle effect has been attached to the %s actor"), *GetOwner()->GetName());
 	}
-	
 }
 
 void AGun::PullTriggerMethod()
@@ -41,8 +45,6 @@ void AGun::PullTriggerMethod()
 void AGun::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	
 
 }
 
