@@ -71,13 +71,22 @@ void AGun::PullTriggerMethod()
 
 	if (bSuccess)
 	{
-		DrawDebugPoint
+		/*DrawDebugPoint
 		(
 			GetWorld(),
 			HitResult.Location,
 			20.f,
 			FColor::Red,
 			true
+		);*/
+		if (!ImpactParticle) { return; }
+		FVector ShotDirection = -PlayerRotation.Vector();
+		UGameplayStatics::SpawnEmitterAtLocation
+		(
+			GetWorld(),
+			ImpactParticle,
+			HitResult.Location,
+			ShotDirection.Rotation()
 		);
 	}
 }
