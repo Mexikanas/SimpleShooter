@@ -3,6 +3,7 @@
 
 #include "Gun.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AGun::AGun()
@@ -22,12 +23,18 @@ AGun::AGun()
 void AGun::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (!MuzzleFlash)
+	{
+		UE_LOG(LogTemp, Error, TEXT("No Particle effect has been attached to the %s actor"), *GetOwner()->GetName());
+	}
 	
 }
 
 void AGun::PullTriggerMethod()
 {
-	UE_LOG(LogTemp, Warning, TEXT("You've been shot."));
+	if (!MuzzleFlash) { return; }
+	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, TEXT("MuzzleFlashSocket"));
 }
 
 // Called every frame

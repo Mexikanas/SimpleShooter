@@ -83,6 +83,7 @@ void AShooterCharacter::RunReleased()
 
 void AShooterCharacter::Shoot()
 {
+	if (!Gun) { return; }
 	Gun->PullTriggerMethod();
 }
 
