@@ -23,4 +23,8 @@ private:
 	UPROPERTY(EditAnywhere)
 		UBehaviorTree* AIBehavior = nullptr;
 
+	void SetPlayerLocation();
+	void SetLastPlayerLocation();
+	void SetStartLocation();
+
 };
