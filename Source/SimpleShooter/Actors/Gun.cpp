@@ -4,6 +4,9 @@
 #include "Gun.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "DrawDebugHelpers.h"
+
+#define OUT
 
 // Sets default values
 AGun::AGun()
@@ -31,7 +34,7 @@ void AGun::CheckForMuzzleFlash() const
 {
 	if (!MuzzleFlash)
 	{
-		UE_LOG(LogTemp, Error, TEXT("No MuzzleFlash particle effect has been attached to the %s actor"), *GetOwner()->GetName());
+		UE_LOG(LogTemp, Error, TEXT("No MuzzleFlash particle effect has been attached to the %s."), *GetOwner()->GetName());
 	}
 }
 
@@ -39,6 +42,32 @@ void AGun::PullTriggerMethod()
 {
 	if (!MuzzleFlash) { return; }
 	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, TEXT("MuzzleFlashSocket"));
+
+	APawn* OwnerPawn = Cast<APawn>(GetOwner());
+	if (!OwnerPawn) { return; }
+	AController* OwnerController = OwnerPawn->GetController();
+	if (!OwnerController) { return; }
+
+	FVector PlayerLocation;
+	FRotator PlayerRotation;
+
+	OwnerController->GetPlayerViewPoint
+	(
+		OUT PlayerLocation,
+		OUT PlayerRotation
+	);
+
+
+	DrawDebugCamera
+	(
+		GetWorld(),
+		PlayerLocation,
+		PlayerRotation,
+		90.f,
+		2.f,
+		FColor::Red,
+		true
+	);
 }
 
 // Called every frame

@@ -45,5 +45,5 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 		TSubclassOf<AGun> GunClass;
 	UPROPERTY()
-		AGun* Gun;
+		AGun* Gun = nullptr;
 };
