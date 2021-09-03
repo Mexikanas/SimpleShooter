@@ -34,7 +34,11 @@ void AGun::CheckForMuzzleFlash() const
 {
 	if (!MuzzleFlash)
 	{
-		UE_LOG(LogTemp, Error, TEXT("No MuzzleFlash particle effect has been attached to the %s."), *GetOwner()->GetName());
+		UE_LOG(LogTemp, Error, TEXT("No MuzzleFlash particle effect has been attached to the %s."), *GetName());
+	}
+	if (!ImpactParticle)
+	{
+		UE_LOG(LogTemp, Error, TEXT("No ImpactParticle effect has been attached to the %s."), *GetName());
 	}
 }
 
