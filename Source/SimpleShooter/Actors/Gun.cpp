@@ -57,17 +57,29 @@ void AGun::PullTriggerMethod()
 		OUT PlayerRotation
 	);
 
+	FVector LineEnd = PlayerLocation + PlayerRotation.Vector() * MaxRange;
+	FHitResult HitResult;
 
-	DrawDebugCamera
+	bool bSuccess = GetWorld()->LineTraceSingleByChannel
 	(
-		GetWorld(),
+		OUT HitResult,
 		PlayerLocation,
-		PlayerRotation,
-		90.f,
-		2.f,
-		FColor::Red,
-		true
+		LineEnd,
+		//Channel for Bullet = GameTraceChannel1
+		ECollisionChannel::ECC_GameTraceChannel1
 	);
+
+	if (bSuccess)
+	{
+		DrawDebugPoint
+		(
+			GetWorld(),
+			HitResult.Location,
+			20.f,
+			FColor::Red,
+			true
+		);
+	}
 }
 
 // Called every frame
