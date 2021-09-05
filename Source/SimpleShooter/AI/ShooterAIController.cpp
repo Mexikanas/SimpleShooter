@@ -33,16 +33,6 @@ void AShooterAIController::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 	
-	//if (!AIBehavior) { return; }
-	//APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
-	//if (LineOfSightTo(PlayerPawn))
-	//{
-	//	SetPlayerLocation();
-	//	SetLastPlayerLocation();
-	//}
-	//else
-	//{
-	//	GetBlackboardComponent()->ClearValue(TEXT("PlayerLocation"));
-	//}
+
 }
 
