@@ -62,14 +62,13 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 
 float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
-	//if (IsDead()) { return 0.f; }
-	
+	if (!GetOwner()) { return 0.f; }
 	float DamageToApply = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 	DamageToApply = FMath::Min(Health, DamageToApply);
 	Health -= DamageToApply;
 	UE_LOG(LogTemp, Warning, TEXT("Health is %f"), Health);
 
-	if (Health == 0 && !IsDead()) // !IsDead() check ensures that this is not run a second time, thus causing nullptr failure 
+	if (Health == 0)
 	{ 
 		bShotFromBehind = IsPlayerBehindEnemy(DamageCauser);
 		bDead = true;
