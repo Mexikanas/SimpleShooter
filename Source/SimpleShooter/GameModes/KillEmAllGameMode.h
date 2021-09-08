@@ -6,9 +6,7 @@
 #include "SimpleShooterGameModeBase.h"
 #include "KillEmAllGameMode.generated.h"
 
-/**
- * 
- */
+
 UCLASS()
 class SIMPLESHOOTER_API AKillEmAllGameMode : public ASimpleShooterGameModeBase
 {

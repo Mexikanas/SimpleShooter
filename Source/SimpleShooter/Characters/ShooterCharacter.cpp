@@ -21,8 +21,6 @@ void AShooterCharacter::BeginPlay()
 	
 	Health = MaxHealth;
 
-	
-
 	SpawnGun();
 }
 
