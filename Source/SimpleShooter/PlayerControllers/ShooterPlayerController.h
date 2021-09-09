@@ -15,13 +15,17 @@ class SIMPLESHOOTER_API AShooterPlayerController : public APlayerController
 
 public:
 	virtual void GameHasEnded(class AActor* EndGameFocus = nullptr, bool bIsWinner = false) override;
-	
+
 private:
-	UPROPERTY(EditAnywhere)
-		TSubclassOf<UUserWidget> LoseScreenClass;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Game Loop", meta = (AllowPrivateAccess = "true"))
+		int32 RestartDelay = 5;
 
-	UPROPERTY(EditAnywhere)
-		float RestartDelay = 5.f;
+	UFUNCTION(BlueprintCallable, meta = (AllowPrivateAccess = "true"))
+		void SetUpNewGame();
 
-	FTimerHandle RestartTimer;
+	void HandleGameOver(bool bPlayerWon);
+
+protected:
+	UFUNCTION(BlueprintImplementableEvent)
+		void GameOver(bool bPlayerWon);
 };
