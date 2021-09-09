@@ -26,7 +26,7 @@ protected:
 	virtual void BeginPlay() override;
 
 private:	
-	void CheckForMuzzleFlash() const;
+	void CheckForGunAssets() const;
 
 	UPROPERTY(VisibleAnywhere)
 		USceneComponent* Root;
@@ -35,7 +35,11 @@ private:
 	UPROPERTY(EditAnywhere)
 		UParticleSystem* MuzzleFlash = nullptr;
 	UPROPERTY(EditAnywhere)
+		USoundBase* MuzzleSound = nullptr;
+	UPROPERTY(EditAnywhere)
 		UParticleSystem* ImpactParticle = nullptr;
+	UPROPERTY(EditAnywhere)
+		USoundBase* ImpactSound = nullptr;
 	UPROPERTY(EditAnywhere)
 		float MaxRange = 1000.f;
 	UPROPERTY(EditAnywhere)

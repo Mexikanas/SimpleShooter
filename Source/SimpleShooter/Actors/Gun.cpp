@@ -27,10 +27,10 @@ void AGun::BeginPlay()
 {
 	Super::BeginPlay();
 
-	CheckForMuzzleFlash();
+	CheckForGunAssets();
 }
 
-void AGun::CheckForMuzzleFlash() const
+void AGun::CheckForGunAssets() const
 {
 	if (!MuzzleFlash)
 	{
@@ -40,13 +40,23 @@ void AGun::CheckForMuzzleFlash() const
 	{
 		UE_LOG(LogTemp, Error, TEXT("No ImpactParticle effect has been attached to the %s."), *GetName());
 	}
+	if (!MuzzleSound)
+	{
+		UE_LOG(LogTemp, Error, TEXT("No MuzzleSound effect has been attached to the %s."), *GetName());
+	}
+	if (!ImpactSound)
+	{
+		UE_LOG(LogTemp, Error, TEXT("No ImpactSound effect has been attached to the %s."), *GetName());
+	}
 }
 
 void AGun::PullTriggerMethod()
 {
 	if (!MuzzleFlash) { return; }
 	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, TEXT("MuzzleFlashSocket"));
-	
+	if (!MuzzleSound) { return; }
+	UGameplayStatics::SpawnSoundAttached(MuzzleSound, Mesh, TEXT("MuzzleFlashSocket"));
+
 	FHitResult HitResult;
 	FVector ShotDirection;
 	
@@ -54,6 +64,8 @@ void AGun::PullTriggerMethod()
 	{
 		if (!ImpactParticle) { return; }
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactParticle, HitResult.Location, ShotDirection.Rotation());
+		if (!ImpactSound) { return; }
+		UGameplayStatics::PlaySoundAtLocation(GetWorld(), ImpactSound, HitResult.Location);
 		AActor* HitActor = HitResult.GetActor();
 		if (HitActor)
 		{
