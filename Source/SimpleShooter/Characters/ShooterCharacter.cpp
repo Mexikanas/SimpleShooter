@@ -112,6 +112,11 @@ bool AShooterCharacter::IsShotFromBehind() const
 	return bShotFromBehind;
 }
 
+float AShooterCharacter::GetHealthPercent() const
+{
+	return Health / MaxHealth;
+}
+
 void AShooterCharacter::MoveForward(float AxisValue)
 {
 	if (!bRun) { AxisValue *= WalkSpeed; }

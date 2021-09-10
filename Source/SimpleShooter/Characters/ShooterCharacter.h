@@ -33,7 +33,8 @@ public:
 	UFUNCTION(BlueprintPure)
 		bool IsShotFromBehind() const;
 
-
+	UFUNCTION(BlueprintPure)
+		float GetHealthPercent() const;
 
 protected:
 	// Called when the game starts or when spawned

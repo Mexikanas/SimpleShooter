@@ -34,9 +34,9 @@ void UBTService_PlayerLocationIfSeen::SetPlayerLocation(UBehaviorTreeComponent& 
 {
 	APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
 	if (!PlayerPawn) { return; }
-	OwnerComp.GetBlackboardComponent()->SetValueAsVector
+	OwnerComp.GetBlackboardComponent()->SetValueAsObject
 	(
 		GetSelectedBlackboardKey(),
-		PlayerPawn->GetActorLocation()
+		PlayerPawn
 	);
 }
