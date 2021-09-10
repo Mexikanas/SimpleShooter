@@ -16,6 +16,12 @@ class SIMPLESHOOTER_API AShooterPlayerController : public APlayerController
 public:
 	virtual void GameHasEnded(class AActor* EndGameFocus = nullptr, bool bIsWinner = false) override;
 
+protected:
+	UFUNCTION(BlueprintImplementableEvent)
+		void GameOver(bool bPlayerWon);
+
+	virtual void BeginPlay() override;
+
 private:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Game Loop", meta = (AllowPrivateAccess = "true"))
 		int32 RestartDelay = 5;
@@ -23,9 +29,12 @@ private:
 	UFUNCTION(BlueprintCallable, meta = (AllowPrivateAccess = "true"))
 		void SetUpNewGame();
 
-	void HandleGameOver(bool bPlayerWon);
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<UUserWidget> HUDClass;
 
-protected:
-	UFUNCTION(BlueprintImplementableEvent)
-		void GameOver(bool bPlayerWon);
+	UPROPERTY(VisibleAnywhere)
+		UUserWidget* HUD = nullptr;
+
+	void HandleGameOver(bool bPlayerWon);
+	void SetUpHUD();
 };
